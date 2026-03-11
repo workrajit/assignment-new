@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dark Mode Toggle</title>
+</head>
+
+<body style="font-family:Arial; margin:0; padding:20px; transition:0.3s;">
+
+<button id="themeBtn"
+style="position:fixed; top:15px; right:15px; padding:10px 15px; cursor:pointer;">
+Dark Mode
+</button>
+
+<h1>Dark Mode Toggle App</h1>
+
+<p>
+This mini application demonstrates how the <b>localStorage API</b> works in JavaScript.
+The toggle button switches between light mode and dark mode.
+</p>
+
+<p>
+When you change the theme, the selected theme is saved in <b>localStorage</b>.
+This means that even if you refresh the page or reopen the browser, the website
+will remember your selected theme.
+</p>
+
+<h3>Features of this Mini App</h3>
+
+<ul>
+<li>Toggle between Light Mode and Dark Mode</li>
+<li>Theme preference saved using localStorage</li>
+<li>Theme remains even after refreshing the page</li>
+<li>Simple inline CSS styling</li>
+</ul>
+
+<script>
+
+const btn = document.getElementById("themeBtn");
+
+/* Load saved theme */
+
+if(localStorage.getItem("theme") === "dark"){
+document.body.style.backgroundColor="black";
+document.body.style.color="white";
+btn.innerText="Light Mode";
+}
+
+/* Toggle theme */
+
+btn.onclick = function(){
+
+if(document.body.style.backgroundColor === "black"){
+
+document.body.style.backgroundColor="white";
+document.body.style.color="black";
+btn.innerText="Dark Mode";
+localStorage.setItem("theme","light");
+
+}else{
+
+document.body.style.backgroundColor="black";
+document.body.style.color="white";
+btn.innerText="Light Mode";
+localStorage.setItem("theme","dark");
+
+}
+
+};
+
+</script>
+
+</body>
+</html>

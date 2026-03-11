@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sticky Notes App</title>
+</head>
+
+<body style="font-family:Arial; margin:20px; text-align:center; background:#121212; color:white;">
+
+<h1>Sticky Notes Mini App</h1>
+
+<p>
+This application demonstrates the use of the <b>localStorage API</b> in JavaScript.
+You can create notes, delete them, and your notes will remain saved in the browser
+even after refreshing the page.
+</p>
+
+<h3>Features</h3>
+
+<ul style="list-style:none;">
+<li>📝 Create new notes</li>
+<li>❌ Delete notes</li>
+<li>💾 Notes saved using localStorage</li>
+<li>🔄 Notes stay even after page refresh</li>
+</ul>
+
+<hr style="margin:20px 0; border:1px solid gray;">
+
+<input id="noteInput" placeholder="Write your note here..." 
+style="padding:10px; width:250px; border-radius:5px; border:none;">
+
+<button onclick="addNote()" 
+style="padding:10px 15px; margin-left:5px; cursor:pointer; border:none; background:#4CAF50; color:white;">
+Add Note
+</button>
+
+<div id="notes" style="margin-top:20px;"></div>
+
+<script>
+
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+function displayNotes(){
+
+let notesDiv = document.getElementById("notes");
+notesDiv.innerHTML="";
+
+notes.forEach((note,index)=>{
+
+let div=document.createElement("div");
+
+div.style.border="1px solid #333";
+div.style.padding="10px";
+div.style.margin="10px";
+div.style.display="inline-block";
+div.style.minWidth="200px";
+div.style.backgroundColor="#1e1e1e";
+div.style.borderRadius="6px";
+
+div.innerHTML = note +
+"<br><br><button onclick='deleteNote("+index+")' style='background:red;color:white;border:none;padding:5px 10px;cursor:pointer;'>Delete</button>";
+
+notesDiv.appendChild(div);
+
+});
+
+}
+
+function addNote(){
+
+let input=document.getElementById("noteInput");
+
+if(input.value.trim()==="") return;
+
+notes.push(input.value);
+
+localStorage.setItem("notes",JSON.stringify(notes));
+
+input.value="";
+
+displayNotes();
+
+}
+
+function deleteNote(index){
+
+notes.splice(index,1);
+
+localStorage.setItem("notes",JSON.stringify(notes));
+
+displayNotes();
+
+}
+
+displayNotes();
+
+</script>
+
+</body>
+</html>
